@@ -41,7 +41,7 @@ def historyRetrieval(request, id):
     return HttpResponse(status=404)
 
 @csrf_exempt
-@require_safe
+@require_POST
 def historyDeletion(request, id):
   if request.user.is_authenticated is None: return HttpResponse(status=401)
 
