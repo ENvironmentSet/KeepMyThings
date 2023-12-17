@@ -7,21 +7,24 @@ from .models import History
 import json
 
 @csrf_exempt
-def history(request):
+@require_POST
+def historyCreation(request):
   if request.user.is_authenticated is None: return HttpResponse(status=401)
 
-  if request.method == 'GET':
-    return JsonResponse([ history.export() for history in History.objects.filter(user=request.user).iterator() ])  
-  elif request.method == 'POST':
-    thumbnail = request.FILES['thumbnail']
-    footage = request.FILES['footage']
-    lost = json.JSONDecoder().decode(request.POST['lost'])
+  thumbnail = request.FILES['thumbnail']
+  footage = request.FILES['footage']
+  lost = json.JSONDecoder().decode(request.POST['lost'])
 
-    History.objects.create(user=request.user, date=timezone.now(), thumbnail=thumbnail, footage=footage, lost=lost)
+  History.objects.create(user=request.user, date=timezone.now(), thumbnail=thumbnail, footage=footage, lost=lost)
       
-    return HttpResponse()
-  else:
-    return HttpResponse(status=405)
+  return HttpResponse()
+  
+@csrf_exempt
+@require_safe
+def historyList(request):
+  if request.user.is_authenticated is None: return HttpResponse(status=401)
+
+  return JsonResponse([ history.export() for history in History.objects.filter(user=request.user).iterator() ]) 
 
 @csrf_exempt
 @require_safe
