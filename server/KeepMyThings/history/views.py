@@ -52,6 +52,6 @@ def historyDeletion(request, id):
 
     history.delete()
 
-    return JsonResponse()
+    return HttpResponse()
   except ObjectDoesNotExist:
     return HttpResponse(status=404)
