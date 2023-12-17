@@ -9,7 +9,7 @@ import json
 @csrf_exempt
 @require_POST
 def historyCreation(request):
-  if request.user.is_authenticated is None: return HttpResponse(status=401)
+  if not request.user.is_authenticated: return HttpResponse(status=401)
 
   thumbnail = request.FILES['thumbnail']
   footage = request.FILES['footage']
@@ -22,14 +22,14 @@ def historyCreation(request):
 @csrf_exempt
 @require_safe
 def historyList(request):
-  if request.user.is_authenticated is None: return HttpResponse(status=401)
+  if not request.user.is_authenticated: return HttpResponse(status=401)
 
   return JsonResponse([ history.export() for history in History.objects.filter(user=request.user).iterator() ]) 
 
 @csrf_exempt
 @require_safe
 def historyRetrieval(request, id):
-  if request.user.is_authenticated is None: return HttpResponse(status=401)
+  if not request.user.is_authenticated: return HttpResponse(status=401)
   
   try:
     history = History.objects.get(id=id)
@@ -43,7 +43,7 @@ def historyRetrieval(request, id):
 @csrf_exempt
 @require_POST
 def historyDeletion(request, id):
-  if request.user.is_authenticated is None: return HttpResponse(status=401)
+  if not request.user.is_authenticated: return HttpResponse(status=401)
 
   try:
     history = History.objects.get(id=id)
