@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication.apps.AuthenticationConfig',
-    'history.apps.HistoryConfig'
+    'history.apps.HistoryConfig',
+    'streaming.apps.StreamingConfig'
 ]
 
 MIDDLEWARE = [
