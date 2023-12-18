@@ -14,3 +14,6 @@ class Stream(models.Model):
       'video': self.video.url,
       'croppedTime': str(self.croppedTime.timestamp())
     }
+  
+  def __str__(self):
+    return f'user({self.user.id}), stream {self.id}'

@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
+import json
 
 def thumbnailUploadPath(instance, _):
-  return f'{instance.user.id}/thumbnails/{instance.date.timestamp}'
+  return f'{instance.user.id}/thumbnails/{instance.date.timestamp()}'
 
 def footageUploadPath(instance, _):
-  return f'{instance.user.id}/footages/{instance.date.timestamp}'
+  return f'{instance.user.id}/footages/{instance.date.timestamp()}'
 
 class History(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,3 +22,6 @@ class History(models.Model):
       'footage': self.footage,
       'lost': self.lost
     }
+  
+  def __str__(self):
+    return f'user({self.user.id}), {json.JSONEncoder().encode(self.lost)} are missing'
