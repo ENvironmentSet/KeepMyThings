@@ -6,7 +6,7 @@ def thumbnailUploadPath(instance, _):
   return f'{instance.user.id}/thumbnails/{instance.date.timestamp()}.jpeg'
 
 def footageUploadPath(instance, _):
-  return f'{instance.user.id}/footages/{instance.date.timestamp()}.jpeg'
+  return f'{instance.user.id}/footages/{instance.date.timestamp()}.mp4'
 
 class History(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
