@@ -13,7 +13,7 @@ def streams(request):
 
   streams = Stream.objects.filter(user=request.user)
 
-  return JsonResponse([stream.export() for stream in streams.iterator()])
+  return JsonResponse([stream.export() for stream in streams.iterator()], safe=False)
 
 @csrf_exempt
 def stream(request, id):
