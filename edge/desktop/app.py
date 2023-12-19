@@ -1,4 +1,3 @@
-import requests
 import torch
 import cv2
 import kits
