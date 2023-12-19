@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">client</string>
+    <string name="host">127.0.0.1:8000</string>
+</resources>

@@ -1,6 +1,7 @@
 import torch
 import cv2
 from Service import Service
+import simpleaudio
 
 def compareList(xs, ys):
   diffMap = {}
@@ -24,6 +25,7 @@ class App:
   KEY_WAIT_TIME = 10
   ANALYSIS_GROUP_SIZE = 25
   analysisCalls = 0
+  alarm = simpleaudio.WaveObject.from_wave_file('./siren.wav')
 
   def __init__(self, username, password):
     self.username = username
@@ -94,6 +96,8 @@ class App:
 
         if len(newlyLost):
           print(f'{newlyLost} are missing')
+          simpleaudio.stop_all()
+          self.alarm.play()
           self.service.createHistory(lost)
           self.missingThings = newlyLost
 
