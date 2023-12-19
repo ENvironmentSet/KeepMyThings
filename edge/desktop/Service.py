@@ -62,3 +62,9 @@ class Service:
 
       if len(self.videoChunks) > Service.CHUNKS_MEMORY_LIMIT:
         self.videoChunks = self.videoChunks[1:]
+
+  def terminateStream(self):
+    requests.post(
+      url=f'http://{Service.SERVER}/stream/{self.streamID}/delete',
+      cookies={ 'sessionid': self.sessionid }
+    )

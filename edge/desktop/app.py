@@ -47,6 +47,7 @@ class App:
   def __exit__(self, _1, _2, _3):
     self.capture.release()
     cv2.destroyAllWindows()
+    self.service.terminateStream()
   
   def searchThings(self, frame):
     return list(self.model(frame).pandas().xyxy[0]['name'])
