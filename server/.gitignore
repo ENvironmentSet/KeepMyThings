@@ -9,4 +9,4 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 uploads/
-.DS_Store/
+.DS_Store
