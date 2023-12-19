@@ -29,9 +29,20 @@ def stream(request, id):
     except ObjectDoesNotExist:
       return HttpResponse(status=404)
   elif request.method == 'POST':
-    Stream.objects.create(user=request.user, video=request.FILES['video'], croppedTime=timezone.now())
+    try:
+      stream = Stream.objects.get(id=id)
 
-    return HttpResponse()
+      if stream.user.id != request.user.id: return HttpResponse(status=403)
+      
+      stream.video = request.FILES['video']
+      stream.croppedTime = timezone.now()
+      stream.save()
+
+      return JsonResponse(stream.export())
+    except ObjectDoesNotExist:
+      Stream.objects.create(user=request.user, video=request.FILES['video'], croppedTime=timezone.now())
+
+      return HttpResponse()
   else:
     return HttpResponse(status=405)
   
