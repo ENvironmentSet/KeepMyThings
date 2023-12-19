@@ -1,7 +1,6 @@
 import requests
 import torch
 import cv2
-import json
 import kits
 from Service import Service
 
