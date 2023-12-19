@@ -38,7 +38,7 @@ def stream(request, id):
       stream.croppedTime = timezone.now()
       stream.save()
 
-      return JsonResponse(stream.export())
+      return HttpResponse()
     except ObjectDoesNotExist:
       Stream.objects.create(user=request.user, video=request.FILES['video'], croppedTime=timezone.now())
 
