@@ -23,7 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".HomeActivity"></activity>
         <activity android:name=".WatcherActivity"></activity>
+        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".HistoryViewActivity"></activity>
     </application>
 
 </manifest>
