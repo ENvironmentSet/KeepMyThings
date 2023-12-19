@@ -3,10 +3,10 @@ from django.db import models
 import json
 
 def thumbnailUploadPath(instance, _):
-  return f'{instance.user.id}/thumbnails/{instance.date.timestamp()}'
+  return f'{instance.user.id}/thumbnails/{instance.date.timestamp()}.jpeg'
 
 def footageUploadPath(instance, _):
-  return f'{instance.user.id}/footages/{instance.date.timestamp()}'
+  return f'{instance.user.id}/footages/{instance.date.timestamp()}.jpeg'
 
 class History(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)

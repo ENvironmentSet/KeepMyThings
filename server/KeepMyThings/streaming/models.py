@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import uuid
 
 def videoPath(instance, _):
-  return f'{instance.user.id}/streams/{instance.fileID}'
+  return f'{instance.user.id}/streams/{instance.fileID}.mp4'
 
 class Stream(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
