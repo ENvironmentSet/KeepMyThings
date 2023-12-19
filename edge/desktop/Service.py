@@ -1,6 +1,7 @@
 import requests
 import cv2
 import json
+import uuid
 
 class LoginFailedError(Exception):
   def __init__(self, username, password):
@@ -24,7 +25,7 @@ class Service:
     if loginResult.status_code != 200: raise LoginFailedError(username, password)
     else: self.sessionid = loginResult.cookies['sessionid']
 
-    self.streamID = -1
+    self.streamID = uuid.uuid4()
 
     self.videoChunks = []
     self.nextVideoChunkFrames = []
@@ -55,9 +56,6 @@ class Service:
         chunkWriter.write(chunkFrame)
       chunkWriter.release()
       chunk = open('chunk.mp4', 'rb')
-      if self.streamID == -1:
-        streams = requests.get(f'http://{Service.SERVER}/stream/', cookies={ 'sessionid': self.sessionid }).json()
-        self.streamID = len(streams)
       requests.post(f'http://{Service.SERVER}/stream/{self.streamID}', cookies={ 'sessionid': self.sessionid }, files={ 'video': chunk })
       self.videoChunks.append(self.nextVideoChunkFrames)
       self.nextVideoChunkFrames = [frame]
