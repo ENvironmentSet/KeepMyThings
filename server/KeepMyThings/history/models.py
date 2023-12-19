@@ -19,7 +19,7 @@ class History(models.Model):
     return { 
       'date': self.date.strftime("%Y-%m-%dT%H:%M:%S"),
       'thumbnail': self.thumbnail.url,
-      'footage': self.footage,
+      'footage': self.footage.url,
       'lost': self.lost
     }
   
