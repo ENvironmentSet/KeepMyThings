@@ -11,7 +11,7 @@ def history(request):
   if not request.user.is_authenticated: return HttpResponse(status=401)
 
   if request.method == 'GET':
-    return JsonResponse([ history.export() for history in History.objects.filter(user=request.user).iterator() ], safe=False) 
+    return JsonResponse([ history.export() for history in History.objects.filter(user=request.user).order_by('-date').iterator() ], safe=False) 
   elif request.method == 'POST':
     thumbnail = request.FILES['thumbnail']
     footage = request.FILES['footage']

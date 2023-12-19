@@ -17,7 +17,7 @@ class History(models.Model):
 
   def export(self):
     return { 
-      'date': str(self.date.timestamp()),
+      'date': self.date.strftime("%Y-%m-%dT%H:%M:%S"),
       'thumbnail': self.thumbnail.url,
       'footage': self.footage,
       'lost': self.lost
