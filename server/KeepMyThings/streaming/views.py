@@ -16,12 +16,12 @@ def streams(request):
   return JsonResponse([stream.export() for stream in streams.iterator()], safe=False)
 
 @csrf_exempt
-def stream(request, id):
+def stream(request, streamID):
   if not request.user.is_authenticated: return HttpResponse(status=401)
 
   if request.method == 'GET': #get_object_or_404
     try:
-      stream = Stream.objects.get(id=id)
+      stream = Stream.objects.get(streamID=streamID)
 
       if stream.user.id != request.user.id: return HttpResponse(status=403)
 
@@ -30,7 +30,7 @@ def stream(request, id):
       return HttpResponse(status=404)
   elif request.method == 'POST':
     try:
-      stream = Stream.objects.get(id=id)
+      stream = Stream.objects.get(streamID=streamID)
 
       if stream.user.id != request.user.id: return HttpResponse(status=403)
       
@@ -48,11 +48,11 @@ def stream(request, id):
   
 @csrf_exempt
 @require_POST
-def streamDeletion(request, id):
+def streamDeletion(request, streamID):
   if not request.user.is_authenticated: return HttpResponse(status=401)
 
   try:
-    stream = Stream.objects.get(id=id)
+    stream = Stream.objects.get(streamID=streamID)
 
     if stream.user.id != request.user.id: return HttpResponse(status=403)
 
