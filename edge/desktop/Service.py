@@ -1,7 +1,6 @@
 import requests
 import cv2
 import json
-import time
 
 class LoginFailedError(Exception):
   def __init__(self, username, password):
