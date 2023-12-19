@@ -40,7 +40,7 @@ def stream(request, streamID):
 
       return HttpResponse()
     except ObjectDoesNotExist:
-      Stream.objects.create(user=request.user, video=request.FILES['video'], croppedTime=timezone.now())
+      Stream.objects.create(streamID=streamID, user=request.user, video=request.FILES['video'], croppedTime=timezone.now())
 
       return HttpResponse()
   else:
